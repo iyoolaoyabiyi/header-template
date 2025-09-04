@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --font-primary: Inter;
+}
+ 
+.btn {
+  @apply cursor-pointer
+}
+.nav-btn {
+  @apply hover:bg-gray-200 py-1 px-2 rounded-md flex items-center justify-center-safe gap-2;
+}
+.icon-text-container {
+  @apply flex flex-col sm:flex-row gap-4 items-start hover:bg-gray-200 p-2 rounded-md
+}
+.flex-responsive {
+  @apply flex flex-col sm:flex-row;
+}
