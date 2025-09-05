@@ -10,7 +10,7 @@
   <script src="./scripts/script.js" defer></script>
 </head>
 <body class="min-h-screen bg-blue-100 text-sm font-primary">
-  <header class="max-w-4/5 mx-auto my-5" id="header">
+  <header class="relative max-w-4/5 mx-auto my-5" id="header">
     <div class="bg-white px-5 py-2 rounded-xl gap-5 mb-5 flex flex-col lg:flex-row justify-between">
       <div class="flex justify-between items-center w-full lg:w-auto">
         <h1 class="font-semibold">Logo</h1>
@@ -19,7 +19,7 @@
       <nav class="hidden lg:flex flex-col lg:flex-row items-start justify-between gap-4" id="mainNav">
         <div class="flex flex-col lg:flex-row items-start lg:items-center gap-2 lg:gap-5 text-gray-700" id="navContainer">
           <button class="btn nav-btn nav-btn-drop" data-toggle-for="productsMenu">Products <i class="fa fa-angle-down"></i></button>
-          <button class="btn nav-btn nav-btn-drop" data-toggle-for="customersMenu">Customers <i class="fa fa-angle-down"></i></button>
+          <button class="btn nav-btn nav-btn-drop" data-toggle-for="solutionsMenu">Solutions <i class="fa fa-angle-down"></i></button>
           <button class="btn nav-btn nav-btn-drop" data-toggle-for="companyMenu">Company <i class="fa fa-angle-down"></i></button>
           <button class="btn nav-btn">Talk to sales</button>
         </div>
@@ -29,15 +29,13 @@
         </div>
       </nav>
     </div>
-    <!-- Item menu -->
-    <section class="hidden p-2 bg-white rounded-xl" id="megaMenu">
-      <div class="menu" id="productsMenu">
-        <!-- Top container -->
+
+    <section class="static lg:absolute w-full p-2 bg-white rounded-xl" id="megaMenu">
+      <!-- Products Menu -->
+      <div class="menu hidden" id="productsMenu">
         <div class="grid lg:grid-cols-2">
-          <!-- Company container -->
           <div class="p-4">
             <h2 class="text-xs font-semibold text-gray-500 uppercase mb-5">Products</h2>
-            <!-- Company Sections -->
             <div class="px-2 flex flex-col gap-2">
               
             </div>
@@ -45,70 +43,77 @@
           
           <div class="p-4 bg-purple-50 rounded-xl">
             <h2 class="text-xs font-semibold text-gray-500 uppercase mb-5">Explore</h2>
-            <!-- Company Sections -->
             
           </div>
         </div>
       </div>
-
-      <div class="menu" id="customersMenu">
-        <!-- Top container -->
-        <div class="grid lg:grid-cols-2">
-          <!-- Company container -->
-          <div class="p-4">
-            <h2 class="text-xs font-semibold text-gray-500 uppercase mb-5">Customers</h2>
-            <!-- Company Sections -->
-            <div class="px-2 flex flex-col gap-2">
-              
+      <!-- Solutions Menu -->
+      <div class="menu" id="solutionsMenu">
+        <div class="grid lg:grid-cols-3">
+          <div class="p-4 col-span-1 lg:col-span-2">
+            <h2 class="text-xs font-semibold text-gray-500 uppercase mb-5">Solutions</h2>
+            <div class="px-2 flex flex-col md:flex-row gap-4 justify-around">
+              <div class="flex flex-col gap-4">
+                <a href="#" class="icon-text-container"><i class="fa fa-laptop-code small-icon"></i> Website and Applications</a>
+                <a href="#" class="icon-text-container"><i class="fa fa-laptop-code small-icon"></i> Customer portals</a>
+                <a href="#" class="icon-text-container"><i class="fa fa-laptop-code small-icon"></i> Intranet and Extranets</a>
+                <a href="#" class="icon-text-container"><i class="fa fa-file-code small-icon"></i> Knowledge Base</a>
+                <a href="#" class="icon-text-container"><i class="fa fa-laptop-code small-icon"></i> Multi-site Management</a>
+              </div>
+              <div class="flex flex-col gap-4">
+                <h3 class="uppercase text-md text-gray-500 font-semibold mb-4">Designed for</h3>
+                <a href="#" class="icon-text-container"><i class="fa fa-laptop-code small-icon"></i> Developers and IT</a>
+                <a href="#" class="icon-text-container"><i class="fa fa-laptop-code small-icon"></i> Business Users</a>
+                <a href="#" class="icon-text-container"><i class="fa fa-laptop-code small-icon"></i> Marketers</a>
+                <a href="#" class="icon-text-container"><i class="fa fa-laptop-code small-icon"></i> DevOps Engineers</a>
+              </div>
             </div>
           </div>
           
-          <div class="p-4 bg-purple-50 rounded-xl">
-            <h2 class="text-xs font-semibold text-gray-500 uppercase mb-5">Explore</h2>
-            <!-- Company Sections -->
-            
+          <div class="p-4 bg-blue-50 rounded-xl">
+            <h2 class="text-xs font-semibold text-gray-500 uppercase mb-5">Customer story</h2>
+            <h3 class="sm:text-2xl text-xl uppercase mb-2 font-semibold text-gray-700">Some business's digital transformation with Company</h3>
+            <p class="sm:text-2xl text-xl text-blue-700 uppercase font-medium mb-6">Some 10000% metric the business achieved</p>
+            <a href="#" class="text-lg underline hover:text-blue-700 hover:no-underline">Read full story</a>
           </div>
         </div>
       </div>
-
-      <div class="menu" id="companyMenu">
-        <!-- Top container -->
+      <!-- Company Menu -->
+      <div class="menu hidden" id="companyMenu">
         <div class="grid lg:grid-cols-2">
-          <!-- Company container -->
           <div class="p-4">
             <h2 class="text-xs font-semibold text-gray-500 uppercase mb-5">Company</h2>
-            <!-- Company Sections -->
             <div class="px-2 flex flex-col gap-2">
               <a href="#" class="icon-text-container">
-                <div class="fa fa-quote-left p-3 shadow shadow-gray-400 rounded-md text-gray-500"></div>
+                <div class="fa fa-quote-left small-icon"></div>
                 <div>
                   <h3 class="font-semibold text-gray-700 mb-1">About us</h3>
                   <p class="text-gray-500">See how we're creative great lives for great people.</p>
                 </div>
               </a>
               <a href="#" class="icon-text-container">
-                <div class="fa fa-trophy p-3 shadow shadow-gray-400 rounded-md text-gray-500"></div>
+                <div class="fa fa-trophy small-icon"></div>
                 <div>
                   <h3 class="font-semibold text-gray-700 mb-1">Careers</h3>
                   <p class="text-gray-500">Unleash your genius & maximize your potential.</p>
                 </div>
               </a>
               <a href="#" class="icon-text-container">
-                <div class="fa fa-paper-plane p-3 shadow shadow-gray-400 rounded-md text-gray-500"></div>
+                <div class="fa fa-paper-plane small-icon"></div>
                 <div>
                   <h3 class="font-semibold text-gray-700 mb-1">Contact us</h3>
                   <p class="text-gray-500">We're excited to help and eager to hear from you.</p>
                 </div>
               </a>
               <a href="#" class="icon-text-container">
-                <div class="fa fa-message p-3 shadow shadow-gray-400 rounded-md text-gray-500"></div>
+                <div class="fa fa-message small-icon"></div>
                 <div>
                   <h3 class="font-semibold text-gray-700 mb-1">Affliate Program</h3>
                   <p class="text-gray-500">Earn up to 40% commision on every licence you refer</p>
                 </div>
               </a>
               <a href="#" class="icon-text-container">
-                <div class="fa fa-cart-shopping p-3 shadow shadow-gray-400 rounded-md text-gray-500"></div>
+                <div class="fa fa-cart-shopping small-icon"></div>
                 <div>
                   <h3 class="font-semibold text-gray-700 mb-1">Store</h3>
                   <p class="text-gray-500">Products to inspire and support your journey.</p>
@@ -119,7 +124,6 @@
           
           <div class="p-4 bg-purple-50 rounded-xl">
             <h2 class="text-xs font-semibold text-gray-500 uppercase mb-5">Explore</h2>
-            <!-- Company Sections -->
             <div class="px-2 flex flex-col gap-2">
               <a href="#" class="flex-responsive gap-4 items-center p-2 rounded-md mb-2">
                 <div class="">
@@ -168,6 +172,9 @@
       </div>
     </section>
   </header>
-  <!-- Mega menu -->
+  <main>
+    <div class="w-full h-screen bg-blue-300"></div>
+    <h2>some haeding</h2>
+  </main>
 </body>
 </html>

@@ -12,8 +12,11 @@
   @apply hover:bg-gray-200 py-1 px-2 rounded-md flex items-center justify-center-safe gap-2;
 }
 .icon-text-container {
-  @apply flex flex-col sm:flex-row gap-4 items-start hover:bg-gray-200 p-2 rounded-md
+  @apply flex flex-col sm:flex-row gap-4 items-start sm:items-center hover:bg-gray-200 p-2 rounded-md
 }
 .flex-responsive {
   @apply flex flex-col sm:flex-row;
+}
+.small-icon {
+  @apply p-3 shadow shadow-gray-400 rounded-md text-gray-500;
 }
