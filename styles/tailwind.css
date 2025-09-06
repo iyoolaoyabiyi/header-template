@@ -20,3 +20,12 @@
 .small-icon {
   @apply p-3 shadow shadow-gray-400 rounded-md text-gray-500;
 }
+.big-nav-link {
+  @apply p-4 bg-gray-700 hover:bg-black rounded-xl;
+}
+.big-nav-link > h3 {
+  @apply text-2xl font-semibold capitalize mb-2;
+}
+.big-nav-link > p {
+  @apply text-lg;
+}

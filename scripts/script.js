@@ -5,13 +5,18 @@ const navBtns = document.querySelectorAll('.nav-btn-drop');
 const megaMenu = document.querySelector('#megaMenu');
 const menuItems = document.querySelectorAll('#megaMenu .menu');
 
-// States
-let currentMenu = '';
-
 // Globals
 const menuBreakpoint = 1024;
 
+// States
+let currentMenu = '';
+
 navToggle.addEventListener('click', () => {
+  if (currentMenu) {
+    currentMenu = '';
+    closeMenuBtnIcon();
+    megaMenu.classList.add('hidden');
+  }
   mainNav.classList.toggle('hidden');
   navToggle.classList.toggle('fa-bars');
   navToggle.classList.toggle('fa-x');
@@ -25,21 +30,21 @@ navBtns.forEach(btn => {
     menuItems.forEach(item => {
       item.classList.add('hidden');
     });
-    toggleMenuBtnIcon();
+    closeMenuBtnIcon();
     
     if (currentMenu === menuId) {
-      // megaMenu.classList.remove('lg:block');
       megaMenu.classList.add('hidden');
       currentMenu = '';
       iconEl.classList.remove('fa-angle-up');
       iconEl.classList.add('fa-angle-down');
     } else {
       moveMegaMenuBOS(btn)
-      // megaMenu.classList.add('lg:block');
       megaMenu.classList.remove('hidden');
       currentMenu = menuId;
       iconEl.classList.remove('fa-angle-down');
       iconEl.classList.add('fa-angle-up');
+      navToggle.classList.remove('fa-bars');
+      navToggle.classList.add('fa-x');
       document.querySelector(`#${menuId}`).classList.remove('hidden');
     }
   })
@@ -53,7 +58,7 @@ window.addEventListener('resize', () => {
 });
 
 // Functions
-function toggleMenuBtnIcon() {
+function closeMenuBtnIcon() {
   navBtns.forEach(btn => {
     const iconEl = btn.querySelector('.fa');
     iconEl.classList.remove('fa-angle-up');
