@@ -12,8 +12,6 @@ const menuBreakpoint = 1024;
 let currentMenu = '';
 
 navToggle.addEventListener('click', () => {
-  console.log(currentMenu);
-  
   if (currentMenu) {
     currentMenu = '';
     closeAllMenuBtnIcon();
