@@ -5,14 +5,18 @@
   --font-primary: Inter;
 }
  
+* {
+  transition: all 300ms ease;
+}
+
 .btn {
   @apply cursor-pointer
 }
 .nav-btn {
-  @apply hover:bg-gray-200 py-1 px-2 rounded-md flex items-center justify-center-safe gap-2;
+  @apply hover:bg-black hover:text-white py-1 px-2 rounded-md flex items-center justify-center-safe gap-2;
 }
 .icon-text-container {
-  @apply flex flex-col sm:flex-row gap-4 items-start sm:items-center hover:bg-gray-200 p-2 rounded-md
+  @apply flex flex-col sm:flex-row gap-4 items-start sm:items-center hover:bg-black text-gray-700 hover:text-white p-2 rounded-md hover:[&>.fa]:text-black hover:[&>.fa]:bg-white hover:[&>.fa]:shadow-white hover:[&p]:!text-gray-300;
 }
 .flex-responsive {
   @apply flex flex-col sm:flex-row;

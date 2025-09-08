@@ -1,8 +1,8 @@
-const header = document.querySelector('#header');
 const navToggle = document.querySelector('#navToggle');
 const mainNav = document.querySelector('#mainNav');
 const navBtns = document.querySelectorAll('.nav-btn-drop');
 const megaMenu = document.querySelector('#megaMenu');
+const mainMenu = document.querySelector('#mainMenu');
 const menuItems = document.querySelectorAll('#megaMenu .menu');
 
 // Globals
@@ -12,9 +12,11 @@ const menuBreakpoint = 1024;
 let currentMenu = '';
 
 navToggle.addEventListener('click', () => {
+  console.log(currentMenu);
+  
   if (currentMenu) {
     currentMenu = '';
-    closeMenuBtnIcon();
+    closeAllMenuBtnIcon();
     megaMenu.classList.add('hidden');
   }
   mainNav.classList.toggle('hidden');
@@ -25,27 +27,27 @@ navToggle.addEventListener('click', () => {
 navBtns.forEach(btn => {
   btn.addEventListener('click', () => {
     const menuId = btn.dataset.toggleFor;
-    const iconEl = btn.querySelector('.fa');
     
     menuItems.forEach(item => {
       item.classList.add('hidden');
     });
-    closeMenuBtnIcon();
+    closeAllMenuBtnIcon();
     
     if (currentMenu === menuId) {
       megaMenu.classList.add('hidden');
+      toggleMenuBtnIcon(btn, 'close');
+      mainMenu.classList.add('rounded-xl');
       currentMenu = '';
-      iconEl.classList.remove('fa-angle-up');
-      iconEl.classList.add('fa-angle-down');
     } else {
-      moveMegaMenuBOS(btn)
+      moveMegaMenuBOS(btn);
+      mainNav.classList.remove('hidden');
       megaMenu.classList.remove('hidden');
-      currentMenu = menuId;
-      iconEl.classList.remove('fa-angle-down');
-      iconEl.classList.add('fa-angle-up');
+      toggleMenuBtnIcon(btn, 'open')
+      mainMenu.classList.remove('rounded-xl');
       navToggle.classList.remove('fa-bars');
       navToggle.classList.add('fa-x');
       document.querySelector(`#${menuId}`).classList.remove('hidden');
+      currentMenu = menuId;
     }
   })
 })
@@ -58,12 +60,20 @@ window.addEventListener('resize', () => {
 });
 
 // Functions
-function closeMenuBtnIcon() {
+function closeAllMenuBtnIcon() {
   navBtns.forEach(btn => {
-    const iconEl = btn.querySelector('.fa');
+    toggleMenuBtnIcon(btn, 'close');
+  });
+}
+function toggleMenuBtnIcon(btn, action) {
+  const iconEl = btn.querySelector('.fa');
+  if (action === 'close') {
     iconEl.classList.remove('fa-angle-up');
     iconEl.classList.add('fa-angle-down');
-  });
+  } else {
+    iconEl.classList.add('fa-angle-up');
+    iconEl.classList.remove('fa-angle-down');
+  }
 }
 // move mega menu based on screen size
 function moveMegaMenuBOS(btn) {
@@ -73,6 +83,5 @@ function moveMegaMenuBOS(btn) {
       header.appendChild(megaMenu);
     } else {
       btn.insertAdjacentElement('afterend', megaMenu);
-      mainNav.classList.remove('hidden');
     }
 }
