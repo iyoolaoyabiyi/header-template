@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mega Menu</title>
+  <title>Fluid Responsive Mega Menu</title>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <link rel="stylesheet" href="./styles/global.css">
   <script src="./scripts/script.js" defer></script>
 </head>
-<body class="bg-red-100 text-sm font-primary">
+<body class="text-sm font-primary">
   <header class="w-full fixed px-4">
     <div class="relative max-w-full md:max-w-4/5 mx-auto my-5 max-h-[95dvh] overflow-y-scroll rounded-xl" id="headerContainer">
       <section class="bg-red-100 px-5 py-2 rounded-xl rounded-t-xl gap-5 mb-5 flex flex-col lg:flex-row justify-between" id="mainMenu">
@@ -193,9 +193,121 @@
       </section>
     </div>
   </header>
-  <main class="w-full min-h-[150vh] pt-25 bg-white text-red-700 flex flex-col justify-between items-center">
-    <p>Content start</p>
-    <p>Content end</p>
+
+  <main class="pt-16">
+    <!-- SECTION 1 -->
+    <section id="s1" class="py-16 border-b border-black/10">
+      <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-8 items-start">
+        <div class="space-y-3">
+          <div class="h-5 w-32 bg-red-700"></div>
+          <h1 class="text-3xl font-bold">Section Title</h1>
+          <p class="text-black/70">Sample paragraph text goes here. Keep it simple and generic.</p>
+          <div class="flex gap-3">
+            <div class="h-10 w-28 border border-black/30 flex items-center justify-center text-xs">BUTTON</div>
+            <div class="h-10 w-28 border border-black/30 flex items-center justify-center text-xs">BUTTON</div>
+          </div>
+        </div>
+        <div class="h-56 md:h-64 border-2 border-dashed border-black/30 flex items-center justify-center">BOX</div>
+      </div>
+    </section> 
+
+    <!-- SECTION 2 -->
+    <section id="s2" class="py-16 border-b border-black/10">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-2xl font-semibold mb-6">Section Title</h2>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="h-36 border border-black/30 p-4">
+            <div class="h-4 w-24 bg-red-700 mb-3"></div>
+            <p class="text-sm text-black/70">Sample text</p>
+          </div>
+          <div class="h-36 border border-black/30 p-4">
+            <div class="h-4 w-24 bg-red-700 mb-3"></div>
+            <p class="text-sm text-black/70">Sample text</p>
+          </div>
+          <div class="h-36 border border-black/30 p-4">
+            <div class="h-4 w-24 bg-red-700 mb-3"></div>
+            <p class="text-sm text-black/70">Sample text</p>
+          </div>
+          <div class="h-36 border border-black/30 p-4">
+            <div class="h-4 w-24 bg-red-700 mb-3"></div>
+            <p class="text-sm text-black/70">Sample text</p>
+          </div>
+          <div class="h-36 border border-black/30 p-4">
+            <div class="h-4 w-24 bg-red-700 mb-3"></div>
+            <p class="text-sm text-black/70">Sample text</p>
+          </div>
+          <div class="h-36 border border-black/30 p-4">
+            <div class="h-4 w-24 bg-red-700 mb-3"></div>
+            <p class="text-sm text-black/70">Sample text</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3 -->
+    <section id="s3" class="py-16 border-b border-black/10">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-2xl font-semibold mb-6">Section Title</h2>
+        <div class="h-52 border-2 border-dashed border-black/30 flex items-center justify-center">WIDE BOX</div>
+        <p class="mt-4 text-sm text-black/70">Sample paragraph text.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 4 -->
+    <section id="s4" class="py-16 border-b border-black/10">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-2xl font-semibold mb-6">Section Title</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="border border-black/30 p-6 h-40">BOX</div>
+          <div class="border border-black/30 p-6 h-40">BOX</div>
+          <div class="border border-black/30 p-6 h-40">BOX</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5 -->
+    <section id="s5" class="py-16 border-b border-black/10">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-2xl font-semibold mb-6">Section Title</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="border-2 border-dashed border-black/30 p-6 h-52 flex items-center justify-center">BOX</div>
+          <div class="border-2 border-dashed border-black/30 p-6 h-52 flex items-center justify-center">BOX</div>
+          <div class="border-2 border-dashed border-black/30 p-6 h-52 flex items-center justify-center">BOX</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6 -->
+    <section id="s6" class="py-16">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-2xl font-semibold mb-6">Section Title</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="border border-black/30 p-6">
+            <div class="h-4 w-40 bg-red-700 mb-3"></div>
+            <p class="text-sm text-black/70">Sample text</p>
+          </div>
+          <div class="border border-black/30 p-6">
+            <div class="h-4 w-40 bg-red-700 mb-3"></div>
+            <p class="text-sm text-black/70">Sample text</p>
+          </div>
+          <div class="border border-black/30 p-6">
+            <div class="h-4 w-40 bg-red-700 mb-3"></div>
+            <p class="text-sm text-black/70">Sample text</p>
+          </div>
+          <div class="border border-black/30 p-6">
+            <div class="h-4 w-40 bg-red-700 mb-3"></div>
+            <p class="text-sm text-black/70">Sample text</p>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <footer class="border-t border-black/20">
+    <div class="max-w-6xl mx-auto px-4 py-8 text-sm flex items-center justify-between">
+      <div class="h-4 w-24 bg-red-700"></div>
+      <p class="text-black/60">Sample footer text</p>
+    </div>
+  </footer>
 </body>
 </html>
