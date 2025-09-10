@@ -33,3 +33,6 @@
 .big-nav-link > p {
   @apply text-lg;
 }
+.news-menu-item {
+  @apply gap-4 items-start sm:items-center p-2 rounded-md mb-2
+}
