@@ -1,85 +1,121 @@
-const navToggle = document.querySelector('#navToggle');
-const mainNav = document.querySelector('#mainNav');
-const navBtns = document.querySelectorAll('.nav-btn-drop');
-const megaMenu = document.querySelector('#megaMenu');
-const mainMenu = document.querySelector('#mainMenu');
-const menuItems = document.querySelectorAll('#megaMenu .menu');
+"use strict";
 
-// Globals
-const menuBreakpoint = 1024;
+/*  Cache DOM  */
+const els = {
+  navToggle: document.querySelector("#navToggle"),
+  mainNav:   document.querySelector("#mainNav"),
+  navBtns:   Array.from(document.querySelectorAll(".nav-btn-drop")),
+  megaMenu:  document.querySelector("#megaMenu"),
+  mainMenu:  document.querySelector("#mainMenu"),
+  // Where to park the mega menu on desktop; fallback prevents the old `header` ref error
+  desktopPark: document.querySelector("#headerContainer") || document.body,
+};
+const menus = new Map(
+  Array.from(document.querySelectorAll("#megaMenu .menuPanel")).map(m => [m.id, m])
+);
 
-// States
-let currentMenu = '';
+/*  Config */
+const MENU_BREAKPOINT = 1024;
+let currentMenuId = "";
 
-navToggle.addEventListener('click', () => {
-  if (currentMenu) {
-    currentMenu = '';
-    closeAllMenuBtnIcon();
-    megaMenu.classList.add('hidden');
-  }
-  mainNav.classList.toggle('hidden');
-  navToggle.classList.toggle('fa-bars');
-  navToggle.classList.toggle('fa-x');
-});
+/*  Utilities  */
+const show = el => el && el.classList.remove("hidden");
+const hide = el => el && el.classList.add("hidden");
+const isWide = () => window.innerWidth >= MENU_BREAKPOINT;
+const menuBtnFor = id => document.querySelector(`[data-toggle-for="${id}"]`);
+const setIcon = (btn, open) => {
+  const icon = btn.querySelector(".fa");
+  if (!icon) return;
+  icon.classList.toggle("fa-angle-up",   open);
+  icon.classList.toggle("fa-angle-down", !open);
+};
+const setExpanded = (btn, expanded) => {
+  btn.setAttribute("aria-expanded", String(expanded));
+};
 
-navBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const menuId = btn.dataset.toggleFor;
-    
-    menuItems.forEach(item => {
-      item.classList.add('hidden');
-    });
-    closeAllMenuBtnIcon();
-    
-    if (currentMenu === menuId) {
-      megaMenu.classList.add('hidden');
-      toggleMenuBtnIcon(btn, 'close');
-      mainMenu.classList.add('rounded-xl');
-      currentMenu = '';
-    } else {
-      moveMegaMenuBOS(btn);
-      mainNav.classList.remove('hidden');
-      megaMenu.classList.remove('hidden');
-      toggleMenuBtnIcon(btn, 'open')
-      mainMenu.classList.remove('rounded-xl');
-      navToggle.classList.remove('fa-bars');
-      navToggle.classList.add('fa-x');
-      document.querySelector(`#${menuId}`).classList.remove('hidden');
-      currentMenu = menuId;
-    }
-  })
-})
+/* Close icons for all menu buttons */
+const closeAllBtnIcons = () => els.navBtns.forEach(btn => setIcon(btn, false));
 
-window.addEventListener('resize', () => {
-  if (currentMenu) {
-    const btn = document.querySelector(`[data-toggle-for=${currentMenu}]`);
-    moveMegaMenuBOS(btn);
-  }
-});
-
-// Functions
-function closeAllMenuBtnIcon() {
-  navBtns.forEach(btn => {
-    toggleMenuBtnIcon(btn, 'close');
-  });
-}
-function toggleMenuBtnIcon(btn, action) {
-  const iconEl = btn.querySelector('.fa');
-  if (action === 'close') {
-    iconEl.classList.remove('fa-angle-up');
-    iconEl.classList.add('fa-angle-down');
+/* Move mega menu depending on screen size */
+const moveMegaMenu = btn => {
+  if (isWide()) {
+    els.desktopPark.appendChild(els.megaMenu);
   } else {
-    iconEl.classList.add('fa-angle-up');
-    iconEl.classList.remove('fa-angle-down');
+    btn.insertAdjacentElement("afterend", els.megaMenu);
+  }
+};
+
+/* Hide all panels */
+const hideAllPanels = () => menus.forEach(panel => hide(panel));
+
+/*  Handlers  */
+function toggleNav() {
+  // If a submenu is open, close it when toggling the main nav
+  if (currentMenuId) {
+    currentMenuId = "";
+    closeAllBtnIcons();
+    hide(els.megaMenu);
+    els.navBtns.forEach(btn => setExpanded(btn, false));
+    els.mainMenu.classList.add("rounded-xl");
+  }
+  els.mainNav.classList.toggle("hidden");
+  els.navToggle.classList.toggle("fa-bars");
+  els.navToggle.classList.toggle("fa-x");
+}
+
+function onNavBtnClick(btn) {
+  const menuId = btn.dataset.toggleFor;
+  if (!menuId || !menus.has(menuId)) return;
+
+  hideAllPanels();
+  closeAllBtnIcons();
+
+  const isSame = currentMenuId === menuId;
+
+  if (isSame) {
+    hide(els.megaMenu);
+    setIcon(btn, false);
+    setExpanded(btn, false);
+    els.mainMenu.classList.add("rounded-xl");
+    if (isWide()) toggleNav();
+    currentMenuId = "";
+  } else {
+    moveMegaMenu(btn);
+    // els.mainNav.classList.remove("hidden");
+    show(els.mainNav);
+    show(els.megaMenu);
+    setIcon(btn, true);
+    setExpanded(btn, true);
+    els.mainMenu.classList.remove("rounded-xl");
+    els.navToggle.classList.remove("fa-bars");
+    els.navToggle.classList.add("fa-x");
+    show(menus.get(menuId));
+    currentMenuId = menuId;
   }
 }
-// move mega menu based on screen size
-function moveMegaMenuBOS(btn) {
-  const screenSize = window.innerWidth;
 
-  if (screenSize >= menuBreakpoint) {
-      header.appendChild(megaMenu);
-    } else {
-      btn.insertAdjacentElement('afterend', megaMenu);
-    }
-}
+/*  Wire up  */
+if (els.navToggle) els.navToggle.addEventListener("click", toggleNav);
+
+els.navBtns.forEach(btn => {
+  // a11y wiring
+  const panelId = btn.dataset.toggleFor;
+  if (panelId) {
+    btn.setAttribute("aria-controls", panelId);
+    setExpanded(btn, false);
+  }
+  btn.addEventListener("click", () => onNavBtnClick(btn));
+});
+
+/* Resize: reposition mega menu for the active button (rAF debounce) */
+let resizeScheduled = false;
+window.addEventListener("resize", () => {
+  if (!currentMenuId) return;
+  if (resizeScheduled) return;
+  resizeScheduled = true;
+  requestAnimationFrame(() => {
+    const btn = menuBtnFor(currentMenuId);
+    if (btn) moveMegaMenu(btn);
+    resizeScheduled = false;
+  });
+});
